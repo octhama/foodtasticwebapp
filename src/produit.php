@@ -4,14 +4,14 @@ session_start();
 
 // insérer les class
 include_once "bddconnect/bdd.php";
-include_once "objets/Produit.php";
-include_once "objets/ImageProduit.php";
+include_once "models/Produit.php";
+include_once "models/ImageProduit.php";
 
 // établir une connection avec la bdd
 $bdd = new Bdd();
 $db = $bdd->connectoBdd();
 
-// initialisation des objets
+// initialisation des models
 $produit = new Produit($db);
 $image_produit = new ImageProduit($db);
 
@@ -115,4 +115,3 @@ echo "</div>";
 
 //  pied de page
 include_once 'market_footer.php';
-?>

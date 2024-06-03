@@ -17,4 +17,4 @@
 # Composer
 /bin/
 /vendor/
-/composer.lock
+/foodtasticwebapp/composer.lock

@@ -5,15 +5,15 @@ session_start();
 session_destroy();
 include 'bddconnect/bdd.php';
 
-// implémentation des objets
-include_once "objets/Produit.php";
-include_once "objets/ImageProduit.php";
+// implémentation des models
+include_once "models/Produit.php";
+include_once "models/ImageProduit.php";
 
 // établir la connexion avec la bdd
 $bdd = new Bdd();
 $db = $bdd->connectoBdd();
 
-// initialisation des objets
+// initialisation des models
 $produit = new Produit($db);
 $image_produit = new ImageProduit($db);
 

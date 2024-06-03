@@ -3,15 +3,15 @@
 // connection à la bdd
 include 'bddconnect/bdd.php';
 
-// inclure les objets
-include_once "objets/Produit.php";
-include_once "objets/ImageProduit.php";
+// inclure les models
+include_once "models/Produit.php";
+include_once "models/ImageProduit.php";
 
 // étalibir la connection à la bdd
 $bdd = new Bdd();
 $db = $bdd->connectoBdd();
 
-// initialisation des objets
+// initialisation des models
 $produit = new Produit($db);
 $image_produit = new ImageProduit($db);
 
@@ -23,4 +23,3 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1; // page est la page en cours, 
 $articles_par_page = 8; // permet de définir le nombre d'élément ou d'article à charger ou à afficher par page
 $num_article = ($articles_par_page * $page) - $articles_par_page; // calcul permettant de gérer le chargement des pages lors du changement de numéro de page
 
-  ?>

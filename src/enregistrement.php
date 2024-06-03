@@ -12,7 +12,7 @@ include'db_user_connect.php';
       <!-- CORE UI CSS-->
       <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
 
-      
+
       <!--AngularJS Framework
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
 	<title>Foodtastic - Enregistrement</title>
@@ -20,7 +20,7 @@ include'db_user_connect.php';
 <body class="app flex-row align-items-center">
 
             <div class="container">
-            
+
             <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="card mx-4">
@@ -28,7 +28,7 @@ include'db_user_connect.php';
               <h1>S'enregistrer</h1>
               <p class="text-muted">Créez votre compte</p>
               <form action="" method="post">
-              	
+
               	<div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">
@@ -66,20 +66,18 @@ include'db_user_connect.php';
                 <input class="form-control" type="password" placeholder="Confirmez votre mot de passe" name="password_2" value="password">
               </div>
               <input type="submit" class="btn btn-block btn-success" name="reguser" value="Créer un compte">
-               
+
               </form>
 
               <?php
-              
+
               if (isset($erreur)) {
               	echo $erreur;
               }
               ?>
-              
-              
-             
+
             </div>
-            
+
             <div class="card-footer p-4">
               <div class="row">
                 <div class="col-6">
@@ -98,20 +96,20 @@ include'db_user_connect.php';
                     Déjà un compte?
                   </a>
                 </div>
-                
+
               </div>
             </div>
           </div>
         </div>
       </div>
-            	
-      
+
+
     </div>
-              
-        
-            
+
+
+
 </body>
-                  
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

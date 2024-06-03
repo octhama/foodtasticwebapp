@@ -12,21 +12,21 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100 img-fluid img-responsive" src="/foodtasticwebapp/src/images-produits/carbio1.jpeg" alt="First slide">
+      <img class="d-block w-100 img-fluid img-responsive" src="images-produits/carbio1.jpeg" alt="First slide">
       <div class="carousel-caption d-none d-md-block">
     <h5>...</h5>
     <p>...</p>
   </div>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100 img-fluid img-responsive" src="/foodtasticwebapp/src/images-produits/carbio6.jpeg" alt="Second slide">
+      <img class="d-block w-100 img-fluid img-responsive" src="images-produits/carbio6.jpeg" alt="Second slide">
       <div class="carousel-caption d-none d-md-block">
     <h5>...</h5>
     <p>...</p>
   </div>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100 img-fluid img-responsive" src="/foodtasticwebapp/src/images-produits/carbio10.jpeg" alt="Third slide">
+      <img class="d-block w-100 img-fluid img-responsive" src="images-produits/carbio10.jpeg" alt="Third slide">
       <div class="carousel-caption d-none d-md-block">
     <h5>...</h5>
     <p>...</p>
@@ -48,17 +48,17 @@
 <div class="container marketing">
   <div class="row">
       <div class="col-lg-4">
-        <img class="rounded-circle" width="140" height="140" src="../src/uploads/images/chianti.jpeg">
+        <img class="rounded-circle" width="140" height="140" src="uploads/images/chianti.jpeg">
         <h2>Vin issu d'une agriculture responsable</h2>
         <p>Porfiter de notre meilleure sélection de vins issu d'une agriculture responsable sans OGM provenant de vignoble sud-Africains, Belge, Français et nord américain.</p>
-        <p><a class="btn btn-secondary btn-pill" href="/foodtasticwebapp/src/vins.php" role="button">En savoir plus »</a></p>
+        <p><a class="btn btn-secondary btn-pill" href="vins.php" role="button">En savoir plus »</a></p>
       </div><!-- /.col-lg-4 -->
       <div class="col-lg-4">
-       <img class="rounded-circle" width="140" height="140" src="/foodtasticwebapp/src/images-produits/cartgreen.png">
+       <img class="rounded-circle" width="140" height="140" src="images-produits/cartgreen.png">
         <h2>Composer votre panier</h2>
         <p>Veuillez bien vous enregister sur notre page avant de composer votre panier afin de faciliter l'élaboration de vôtre facture ou preuve d'achat.</p>
         <?php if (isset($_SESSION['identifiant'])) {
-          echo "<a class='btn btn-pill btn-success' href='/foodtasticwebapp/src/panier.php' role='button'>Composer vôtre panier</a>";
+          echo "<a class='btn btn-pill btn-success' href='panier.php' role='button'>Composer vôtre panier</a>";
         }else{
           echo "<a class='btn btn-pill btn-danger' href='enregistrement.php'  role='button'>Enregistrez-vous</a>";
         }  ?>
@@ -83,66 +83,66 @@
       <div class="row">
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="/foodtasticwebapp/src/uploads/images/jamfraise.jpeg">
+             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/jamfraise.jpeg">
             <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="/foodtasticwebapp/src/produit.php?id=32" role="button">En savoir plus »</a></p>
+                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=32" role="button">En savoir plus »</a></p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="/foodtasticwebapp/src/uploads/images/jacobcreek.jpeg">
+            <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/jacobcreek.jpeg">
             <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="/foodtasticwebapp/src/produit.php?id=31" role="button">En savoir plus »</a></p>
+                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=31" role="button">En savoir plus »</a></p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="/foodtasticwebapp/src/uploads/images/macaron.jpeg">
+            <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/macaron.jpeg">
             <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="/foodtasticwebapp/src/produit.php?id=19" role="button">En savoir plus »</a></p>
+                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=19" role="button">En savoir plus »</a></p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="/foodtasticwebapp/src/uploads/images/mangoes.jpeg">
+             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/mangoes.jpeg">
             <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="/foodtasticwebapp/src/produit.php?id=90" role="button">En savoir plus »</a></p>
+                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=90" role="button">En savoir plus »</a></p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="/foodtasticwebapp/src/uploads/images/honeybottle.jpeg">
+             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/honeybottle.jpeg">
             <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="/foodtasticwebapp/src/produit.php?id=20" role="button">En savoir plus »</a></p>
+                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=20" role="button">En savoir plus »</a></p>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="/foodtasticwebapp/src/uploads/images/jamorange.jpeg">
+             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/jamorange.jpeg">
             <div class="card-body">
               <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
               <div class="d-flex justify-content-between align-items-center">
-               <p><a class="btn btn-secondary btn-pill" href="/foodtasticwebapp/src/produit.php?id=33" role="button">En savoir plus »</a></p>
+               <p><a class="btn btn-secondary btn-pill" href="produit.php?id=33" role="button">En savoir plus »</a></p>
               </div>
             </div>
           </div>
