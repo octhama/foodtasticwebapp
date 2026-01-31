@@ -1,106 +1,101 @@
 <?php
-// Démarrer la session
-session_start();
+require_once 'includes/config.php';
 
-// connection à la bdd
-include 'bddconnect/bdd.php';
+$titre_page = "Paiement - Foodtastic";
+require_once 'includes/header.php';
 
-// implémentation des objects
-include_once "models/Produit.php";
-include_once "models/ImageProduit.php";
+$panier = $_SESSION['panier'];
 
-// établir la connection à la bdd
-$bdd = new Bdd();
-$db = $bdd->connectoBdd();
+if (count($panier) > 0):
+    $ids = array_keys($panier);
+    $decl = $produit->lireParIds($ids);
+    $total = 0;
+    $article_compter = 0;
+    ?>
 
-// initialisation des models
-$produit = new Produit($db);
-$image_produit = new ImageProduit($db);
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-lg animate__animated animate__fadeIn">
+                <div class="card-body p-5">
+                    <h1 class="font-weight-bold mb-4">Récapitulatif de commande</h1>
 
-// titre de la page
-$titre_page="Paiement - Foodtastic";
+                    <div class="mb-5">
+                        <?php while ($ligne = $decl->fetch(PDO::FETCH_ASSOC)):
+                            extract($ligne);
+                            $quantite = $panier[$id]['quantite'];
+                            $sous_total = $prixprod * $quantite;
+                            $article_compter += $quantite;
+                            $total += $sous_total;
+                            ?>
+                            <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                                <div>
+                                    <h6 class="font-weight-bold mb-1"><?php echo $nomprod; ?></h6>
+                                    <span class="text-muted small"><?php echo $quantite; ?> x
+                                        <?php echo number_format($prixprod, 2, ',', ' '); ?> €</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-weight-bold"><?php echo number_format($sous_total, 2, ',', ' '); ?>
+                                        €</span>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
 
-// ajout de l'entête
-include 'market_header.php';
+                    <div class="bg-light p-4 rounded-lg mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Sous-total (<?php echo $article_compter; ?> articles)</span>
+                            <span><?php echo number_format($total, 2, ',', ' '); ?> €</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Frais de port</span>
+                            <span class="text-success">Offerts</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mt-3">
+                            <h4 class="font-weight-bold mb-0">Total à payer</h4>
+                            <h4 class="font-weight-bold text-primary mb-0"><?php echo number_format($total, 2, ',', ' '); ?>
+                                €</h4>
+                        </div>
+                    </div>
 
-if(count($_SESSION['panier'])>0){
+                    <?php if (isset($_SESSION['identifiant'])): ?>
+                        <div class="text-center mt-5">
+                            <p class="text-muted small mb-4"><i class="fas fa-lock mr-2"></i>Paiement 100% sécurisé</p>
+                            <a href="commander.php" class="btn btn-primary btn-lg btn-pill px-5 py-3 shadow font-weight-bold">
+                                Confirmer et commander <i class="fas fa-check-double ml-2"></i>
+                            </a>
+                        </div>
+                    <?php else: ?>
+                        <div class="alert alert-warning p-4 border-0 shadow-sm animate__animated animate__pulse">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-exclamation-circle fa-2x mr-3 text-warning"></i>
+                                <div>
+                                    <h6 class="font-weight-bold mb-1">Connexion requise</h6>
+                                    <p class="mb-0 small text-muted">Veuillez vous <a href="connexion.php"
+                                            class="font-weight-bold">connecter</a> ou vous <a href="enregistrement.php"
+                                            class="font-weight-bold">enregistrer</a> pour finaliser votre commande.</p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
 
-    // récupérer l'ids des produits
-    $ids = array();
-    foreach($_SESSION['panier'] as $id=>$value){
-        array_push($ids, $id);
-    }
+            <div class="text-center mt-4">
+                <a href="panier.php" class="btn btn-link text-muted">
+                    <i class="fas fa-arrow-left mr-2"></i>Retour au panier
+                </a>
+            </div>
+        </div>
+    </div>
 
-    $decl=$produit->lireParIds($ids);
+<?php else: ?>
+    <div class="text-center py-5">
+        <i class="fas fa-shopping-cart fa-4x text-muted mb-4 opacity-25"></i>
+        <h3>Panier vide</h3>
+        <p class="text-muted">Vous n'avez aucun article à payer.</p>
+        <a href="index.php" class="btn btn-primary btn-pill px-4 mt-3">Retour à la boutique</a>
+    </div>
+<?php endif; ?>
 
-    $total=0;
-    $article_compter=0;
-
-    while ($ligne = $decl->fetch(PDO::FETCH_ASSOC)){
-        extract($ligne);
-
-        $quantite=$_SESSION['panier'][$id]['quantite'];
-        $montant_total=$prixprod*$quantite;
-
-        //echo "<div class='product-id' style='display:none;'>{$id}</div>";
-        //echo "<div class='product-name'>{$name}</div>";
-
-        // =================
-        echo "<div class='cart-row'>";
-            echo "<div class='col-md-8'>";
-
-                echo "<div class='nom-produit mb-3'><h4>{$nomprod}</h4></div>";
-                echo $quantite>1 ? "<div>{$quantite} articles</div>" : "<div>{$quantite} article</div>";
-
-            echo "</div>";
-
-            echo "<div class='col-md-4'>";
-                echo "<h4>&#8364;" . number_format($prixprod, 2, '.', ',') . "</h4>";
-            echo "</div>";
-        echo "</div>";
-        // =================
-
-        $article_compter += $quantite;
-        $total+=$montant_total;
-    }
-
-    // echo "<div class='col-md-8'></div>";
-    echo "<div class='col-md-12 text-align-center'>";
-        echo "<div class='cart-row'>";
-            if($article_compter>1){
-                echo "<h4 class='mb-3'>Total ({$article_compter} articles)</h4>";
-            }else{
-                echo "<h4 class='mb-3'>Total ({$article_compter} article)</h4>";
-            }
-            echo "<h4>&#8364;" . number_format($total, 2, '.', ',') . "</h4>";
-            if (isset($_SESSION['identifiant'])) {
-               echo "<a href='commander.php' class='btn btn-lg btn-success btn-pill mt-5'> <i class='fas fa-check-double'></i>
-                 Commander
-            </a>";
-            }else{
-
-                echo "<div class='col-md-12'>";
-        echo "<div class='alert alert-danger'>";
-            echo "Veuillez bien vous <a href='enregistrement.php'>enregister</a> avant de passer votre commande!  
-                
-            ";
-        echo "</div>";
-    echo "</div>";
-
-            }
-
-        echo "</div>";
-    echo "</div>";
-
-}
-
-else{
-    echo "<div class='col-md-12'>";
-        echo "<div class='alert alert-danger'>";
-            echo "Aucun produit(s) trouvé dans votre panier!";
-        echo "</div>";
-    echo "</div>";
-}
-
-include 'market_footer.php';
-?>
+<?php require_once 'includes/footer.php'; ?>

@@ -1,0 +1,25 @@
+services:
+  db:
+    image: mariadb:10.6
+    container_name: foodtastic_db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: foodtasticbdd
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./src/foodtasticbdd/foodtasticbdd.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: foodtastic_pma
+    links:
+      - db:db
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+
+volumes:
+  db_data:

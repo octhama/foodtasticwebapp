@@ -1,0 +1,236 @@
+:root {
+    --primary-color: #2D6A4F;
+    --primary-hover: #1B4332;
+    --secondary-color: #74C69D;
+    --accent-color: #D8F3DC;
+    --bg-light: #F8F9FA;
+    --bg-dark: #212529;
+    --text-main: #2D3436;
+    --text-muted: #636E72;
+    --white: #FFFFFF;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.12);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+}
+
+/* Premium Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    color: var(--bg-dark);
+}
+
+.title {
+    position: relative;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* Navbar Enhancements */
+.navbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    padding: 1rem 2rem;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--primary-color) !important;
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-main) !important;
+    margin: 0 0.5rem;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+.nav-item.active .nav-link {
+    color: var(--primary-color) !important;
+}
+
+/* Card Enhancements */
+.card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.nom-produit {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    height: 3rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+}
+
+/* Button Styling */
+.btn-pill {
+    border-radius: 50px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    text-transform: none;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    border: 1px solid #E0E0E0;
+}
+
+.btn-secondary:hover {
+    background-color: #EEEEEE;
+    color: var(--primary-color);
+}
+
+/* Carousel */
+.carousel {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-hover);
+    margin-top: 2rem !important;
+    margin-bottom: 6rem !important;
+}
+
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+
+/* Pagination Overhaul */
+.pagination {
+    margin-top: 3rem;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.page-item .page-link {
+    border: none;
+    border-radius: 10px !important;
+    color: var(--text-main);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary-color) !important;
+    color: var(--white) !important;
+    box-shadow: 0 4px 10px rgba(45, 106, 79, 0.3);
+}
+
+.page-item:not(.active) .page-link:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+}
+
+/* Footer Styling */
+footer {
+    background-color: var(--bg-dark);
+    color: #CED4DA;
+    padding-top: 4rem;
+    margin-top: 5rem;
+}
+
+footer h6 {
+    color: var(--white);
+    margin-bottom: 1.5rem;
+}
+
+footer a {
+    color: #ADB5BD;
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.separator {
+    border-top: 1px solid #EEEEEE;
+    margin: 4rem 0;
+}
+
+/* Marketing Section */
+.marketing img {
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+}
+
+.marketing .col-lg-4:hover img {
+    transform: scale(1.1) rotate(5deg);
+}

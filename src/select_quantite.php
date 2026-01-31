@@ -1,22 +1,20 @@
 <?php
-// Démarrer la session
-session_start();
- 
-// récupérer l'id du produit
-$id = isset($_GET['id']) ? $_GET['id'] : 1;
-$quantity = isset($_GET['quantite']) ? $_GET['quantite'] : "";
- 
-// mettre la quantité à 1 au minimum
-$quantity=$quantity<=0 ? 1 : $quantity;
- 
-// supprimer l'article depuis le tableau
-unset($_SESSION['panier'][$id]);
- 
-// ajouter un article avec la mise à jour de la quantité
-$_SESSION['panier'][$id]=array(
-    'quantite'=>$quantity
-);
- 
-// redirection vers la liste des produits et signaler à l'utilisateur ce qui a été retirer ou ajouter au panier
-header('Location: panier.php?action=select_quantite&id=' . $id);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$id = isset($_GET['id']) ? $_GET['id'] : "";
+$quantite = isset($_GET['quantite']) ? (int) $_GET['quantite'] : 1;
+
+// Ensure minimum quantity is 1
+$quantite = $quantite <= 0 ? 1 : $quantite;
+
+if ($id && isset($_SESSION['panier'][$id])) {
+    $_SESSION['panier'][$id]['quantite'] = $quantite;
+    header('Location: panier.php?action=select_quantite&id=' . $id);
+} else {
+    // If item not in cart, redirect to cart anyway
+    header('Location: panier.php');
+}
+exit();
 ?>

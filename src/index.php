@@ -1,160 +1,128 @@
+<?php
+$titre_page = "Accueil - Foodtastic";
+$show_hero = true;
+require_once 'includes/header.php';
+?>
 
-
-<!--entête de la page principale-->
-<?php require 'header_index.php';?>
-
-<!--Début carousel-->
-<div id="carouselExampleControls" class="container carousel slide w-80" data-ride="carousel">
-	<ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+<!-- Carousel Section -->
+<div id="heroCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#heroCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#heroCarousel" data-slide-to="1"></li>
+    <li data-target="#heroCarousel" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100 img-fluid img-responsive" src="images-produits/carbio1.jpeg" alt="First slide">
-      <div class="carousel-caption d-none d-md-block">
-    <h5>...</h5>
-    <p>...</p>
-  </div>
+      <img class="d-block w-100" src="images-produits/carbio1.jpeg" alt="Saine alimentation">
+      <div class="carousel-caption d-none d-md-block animate__animated animate__fadeInUp">
+        <h2 class="display-4 font-weight-bold">Fraîcheur locale</h2>
+        <p class="lead">Découvrez notre sélection de produits frais directement venus des producteurs.</p>
+        <a href="produits.php" class="btn btn-primary btn-lg btn-pill mb-3">Voir la boutique</a>
+      </div>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100 img-fluid img-responsive" src="images-produits/carbio6.jpeg" alt="Second slide">
+      <img class="d-block w-100" src="images-produits/carbio6.jpeg" alt="Fruits de saison">
       <div class="carousel-caption d-none d-md-block">
-    <h5>...</h5>
-    <p>...</p>
-  </div>
+        <h2 class="display-4 font-weight-bold">Agriculture Responsable</h2>
+        <p class="lead">Soutenez une économie circulaire avec des produits sains et sans OGM.</p>
+        <a href="fruit.php" class="btn btn-primary btn-lg btn-pill mb-3">Nos Fruits</a>
+      </div>
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100 img-fluid img-responsive" src="images-produits/carbio10.jpeg" alt="Third slide">
+      <img class="d-block w-100" src="images-produits/carbio10.jpeg" alt="Panier garni">
       <div class="carousel-caption d-none d-md-block">
-    <h5>...</h5>
-    <p>...</p>
-  </div>
+        <h2 class="display-4 font-weight-bold">Livraison Rapide</h2>
+        <p class="lead">Votre panier livré chez vous dans le respect de l'environnement.</p>
+        <a href="panier.php" class="btn btn-primary btn-lg btn-pill mb-3">Composer mon panier</a>
+      </div>
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+  <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
+    <span class="sr-only">Précédent</span>
   </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
+    <span class="sr-only">Suivant</span>
   </a>
 </div>
-<!--Fin carousel-->
 
-<!--Début contenue marketing-->
-<div class="container marketing">
-  <div class="row">
-      <div class="col-lg-4">
-        <img class="rounded-circle" width="140" height="140" src="uploads/images/chianti.jpeg">
-        <h2>Vin issu d'une agriculture responsable</h2>
-        <p>Porfiter de notre meilleure sélection de vins issu d'une agriculture responsable sans OGM provenant de vignoble sud-Africains, Belge, Français et nord américain.</p>
-        <p><a class="btn btn-secondary btn-pill" href="vins.php" role="button">En savoir plus »</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-       <img class="rounded-circle" width="140" height="140" src="images-produits/cartgreen.png">
-        <h2>Composer votre panier</h2>
-        <p>Veuillez bien vous enregister sur notre page avant de composer votre panier afin de faciliter l'élaboration de vôtre facture ou preuve d'achat.</p>
-        <?php if (isset($_SESSION['identifiant'])) {
-          echo "<a class='btn btn-pill btn-success' href='panier.php' role='button'>Composer vôtre panier</a>";
-        }else{
-          echo "<a class='btn btn-pill btn-danger' href='enregistrement.php'  role='button'>Enregistrez-vous</a>";
-        }  ?>
-
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <img class="rounded-circle" width="140" height="140" src="https://cdn.pixabay.com/photo/2019/04/04/11/30/delivery-4102583__480.jpg">
-        <h2>Livraison à temps et facturation en ligne </h2>
-        <p>Où que vous soignez nous nous assurons de vous livrez en temps et en heure grâce à notre vaste réseau de livreurs, en tout sécurité. Recevez également votre facture ou preuve d'achat en ligne pour à présenter au livreur pour un réception sécurisé de vos commandes</p>
-        <p><a class="btn btn-secondary btn-pill" href="#" role="button">En savoir plus »</a></p>
-      </div><!-- /.col-lg-4 -->
+<!-- Features Section -->
+<div class="container marketing mt-5 pt-5">
+  <div class="row text-center">
+    <div class="col-lg-4">
+      <div class="mb-4">
+        <img class="rounded-circle shadow-lg" width="160" height="160" src="uploads/images/chianti.jpeg" alt="Vins">
+      </div>
+      <h3>Vins Responsables</h3>
+      <p class="text-muted px-3">Profitez de notre meilleure sélection de vins issus d'une agriculture responsable
+        provenant de vignobles sélectionnés.</p>
+      <p><a class="btn btn-secondary btn-pill" href="vins.php">En savoir plus &raquo;</a></p>
     </div>
-<!--Fin contenue marketing-->
+    <div class="col-lg-4">
+      <div class="mb-4">
+        <img class="rounded-circle shadow-lg border border-success" width="160" height="160"
+          src="images-produits/cartgreen.png" alt="Panier">
+      </div>
+      <h3>Panier Sur Mesure</h3>
+      <p class="text-muted px-3">Composez votre panier selon vos envies. Enregistrez-vous pour faciliter vos futurs
+        achats.</p>
+      <?php if (isset($_SESSION['identifiant'])): ?>
+        <a class="btn btn-primary btn-pill shadow" href="panier.php">Mon Panier</a>
+      <?php else: ?>
+        <a class="btn btn-success btn-pill shadow" href="enregistrement.php">S'enregistrer</a>
+      <?php endif; ?>
+    </div>
+    <div class="col-lg-4">
+      <div class="mb-4">
+        <img class="rounded-circle shadow-lg" width="160" height="160"
+          src="https://cdn.pixabay.com/photo/2019/04/04/11/30/delivery-4102583__480.jpg" alt="Livraison">
+      </div>
+      <h3>Livraison Express</h3>
+      <p class="text-muted px-3">Où que vous soyez, nous nous assurons de vous livrer en temps et en heure grâce à notre
+        réseau local.</p>
+      <p><a class="btn btn-secondary btn-pill" href="#">Zones de livraison &raquo;</a></p>
+    </div>
+  </div>
 
-<!--Sélection de produits pour le client-->
+  <div class="separator"></div>
 
- <h2 class="title"  style="text-align: center;">Notre sélection de produits Foodtastic pour vous </h2>
-<hr class="separator">
-    <div class="row featurette">
-<div class="album py-5 bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/jamfraise.jpeg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=32" role="button">En savoir plus »</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/jacobcreek.jpeg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=31" role="button">En savoir plus »</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/macaron.jpeg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=19" role="button">En savoir plus »</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/mangoes.jpeg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=90" role="button">En savoir plus »</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/honeybottle.jpeg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <p><a class="btn btn-secondary btn-pill" href="produit.php?id=20" role="button">En savoir plus »</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-             <img class="bd-placeholder-img img-fluid card-img-top" width="100%" height="225" focusable="false" role="img" src="uploads/images/jamorange.jpeg">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-               <p><a class="btn btn-secondary btn-pill" href="produit.php?id=33" role="button">En savoir plus »</a></p>
-              </div>
+  <!-- Product Spotlight -->
+  <div class="text-center mb-5">
+    <h2 class="title h1">Sélection Foodtastic</h2>
+    <p class="lead text-muted">Nos produits stars du moment, choisis avec soin pour vous.</p>
+  </div>
+
+  <div class="row">
+    <?php
+    // Hardcoded IDs for spotlight as in original code
+    $spotlight_ids = [32, 31, 19, 90, 20, 33];
+    // Fetch these products
+    $spotlight_items = $produit->lireParIds($spotlight_ids);
+
+    while ($row = $spotlight_items->fetch(PDO::FETCH_ASSOC)):
+      extract($row);
+      $image_produit->produit_id = $id;
+      $img_row = $image_produit->readFirst()->fetch(PDO::FETCH_ASSOC);
+      $img = $img_row ? "uploads/images/{$img_row['nomimgprod']}" : "https://via.placeholder.com/300x200";
+      ?>
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm border-0 h-100">
+          <img class="card-img-top" src="<?php echo $img; ?>" alt="<?php echo $nomprod; ?>">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title font-weight-bold"><?php echo $nomprod; ?></h5>
+            <p class="card-text text-muted small flex-grow-1">Découvrez la saveur authentique de nos produits locaux de
+              haute qualité.</p>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <span class="h5 mb-0 text-success font-weight-bold"><?php echo number_format($prixprod, 2, ',', ' '); ?>
+                €</span>
+              <a href="produit.php?id=<?php echo $id; ?>" class="btn btn-outline-primary btn-pill btn-sm">Détails</a>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <?php endwhile; ?>
   </div>
-  </div>
- <hr class="featurette-divider">
+</div>
 
-<!--Footer page principale-->
-<?php require 'footer_index.php';?>
-
-
-
+<?php require_once 'includes/footer.php'; ?>

@@ -1,6 +1,7 @@
 <?php
 // objet 'produit'
-class Produit {
+class Produit
+{
 
     // connexion à la bdd et nom de la table
     private $conn;
@@ -16,12 +17,14 @@ class Produit {
     public $timestamp;
 
     // constructeur
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
     // lire tous les produits
-    function read($num_article, $articles_par_page) {
+    function read($num_article, $articles_par_page)
+    {
         // sélectionner tous les produits
         $req = "SELECT
                     id, nomprod, description, prixprod 
@@ -47,7 +50,8 @@ class Produit {
     }
 
     // utiliser pour la pagination des produits
-    public function count() {
+    public function count()
+    {
         // requête pour compter tous les produits enregistrés
         $req = "SELECT count(*) FROM " . $this->nom_table;
 
@@ -65,7 +69,8 @@ class Produit {
     }
 
     // lire tous les produits basés sur les ids produits inclus dans la variable $ids
-    public function lireParIds($ids) {
+    public function lireParIds($ids)
+    {
         $ids_arr = str_repeat('?,', count($ids) - 1) . '?';
 
         // requête pour sélectionner les produits
@@ -82,7 +87,8 @@ class Produit {
     }
 
     // lire les articles par catégorie
-    private function lireParCategorie($id_categorie) {
+    public function lireParCategorie($id_categorie)
+    {
         // requête pour sélectionner tous les produits
         $req = "SELECT id, nomprod, description, prixprod, id_categorie, nom_categorie  
                 FROM " . $this->nom_table . " 
@@ -102,31 +108,38 @@ class Produit {
     }
 
     // lire les articles par catégories spécifiques
-    function lireParCategorieMiel() {
+    function lireParCategorieMiel()
+    {
         return $this->lireParCategorie(13);
     }
 
-    function lireParCategorieWine() {
+    function lireParCategorieWine()
+    {
         return $this->lireParCategorie(14);
     }
 
-    function lireParCategorieOlive() {
+    function lireParCategorieOlive()
+    {
         return $this->lireParCategorie(15);
     }
 
-    function lireParCategorieJam() {
+    function lireParCategorieJam()
+    {
         return $this->lireParCategorie(16);
     }
 
-    function lireParCategorieCookie() {
+    function lireParCategorieCookie()
+    {
         return $this->lireParCategorie(17);
     }
 
-    function lireParCategorieVeg() {
+    function lireParCategorieVeg()
+    {
         return $this->lireParCategorie(18);
     }
 
-    function lireParCategorieFruit() {
+    function lireParCategorieFruit()
+    {
         return $this->lireParCategorie(19);
     }
 

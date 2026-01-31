@@ -1,14 +1,22 @@
 <?php
-// Démarrer la session
-session_start();
+$titre_page = "Tous nos produits - Foodtastic";
+require_once 'includes/header.php';
 
-include 'decl_var_produits.php';
-// définir le titre de la page
-$titre_page="Produits - Foodtastic";
- 
-// entête de la page
-include 'market_header.php';
-include 'affiche_produits.php';
-// pied de page
-include 'market_footer.php';
+// Action messages
+if ($action == 'ajouter') {
+    echo "<div class='alert alert-success animate__animated animate__fadeInDown'>Article ajouté au panier !</div>";
+}
+if ($action == 'existe_deja') {
+    echo "<div class='alert alert-info animate__animated animate__fadeInDown'>Cet article est déjà dans votre panier.</div>";
+}
+
+// Fetch all products
+$decl = $produit->read($num_article, $articles_par_page);
+$num = $decl->rowCount();
+$nbr_lignes = $produit->count(); // Total products for pagination
+$page_url = "produits.php?";
+
+include_once "includes/product_display.php";
+
+require_once 'includes/footer.php';
 ?>

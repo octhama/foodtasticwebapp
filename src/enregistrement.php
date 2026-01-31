@@ -1,121 +1,90 @@
 <?php
-include'db_user_connect.php';
+$titre_page = "S'enregistrer - Foodtastic";
+require_once 'includes/auth.php';
+require_once 'includes/header.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head lang="fr">
-	<meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <!-- CSS Bootstrap -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-      <!-- CORE UI CSS-->
-      <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
 
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-lg border-0 animate__animated animate__zoomIn">
+      <div class="card-body p-5">
+        <div class="text-center mb-4">
+          <h1 class="font-weight-bold">Créer un compte</h1>
+          <p class="text-muted">Rejoignez la communauté Foodtastic</p>
+        </div>
 
-      <!--AngularJS Framework
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>-->
-	<title>Foodtastic - Enregistrement</title>
-</head>
-<body class="app flex-row align-items-center">
-
-            <div class="container">
-
-            <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card mx-4">
-            <div class="card-body p-4">
-              <h1>S'enregistrer</h1>
-              <p class="text-muted">Créez votre compte</p>
-              <form action="" method="post">
-
-              	<div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="icon-user"></i>
-                  </span>
-                </div>
-                <input class="form-control" type="text" placeholder="Identifiant de votre choix" name="identifiant" value="<?php if (isset($identifiant)){echo $identifiant;} ?>">
+        <form action="" method="post">
+          <div class="form-group mb-3">
+            <label class="small font-weight-bold text-muted">Identifiant</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-light border-right-0"><i class="fas fa-user"></i></span>
               </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>
-                <input class="form-control" type="email" placeholder="Email" name="email" value="<?php if(isset($email)) {echo $email;}?>">
-              </div>
-               <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>
-                <input class="form-control" type="email" placeholder="Confirmez votre Email" name="emailconf" value="<?php if (isset($emailconf)){echo $emailconf;}?>">
-              </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="icon-lock"></i>
-                  </span>
-                </div>
-                <input class="form-control" type="password" placeholder="Mot de passe" name="password_1" value="password">
-              </div>
-              <div class="input-group mb-4">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">
-                    <i class="icon-lock"></i>
-                  </span>
-                </div>
-                <input class="form-control" type="password" placeholder="Confirmez votre mot de passe" name="password_2" value="password">
-              </div>
-              <input type="submit" class="btn btn-block btn-success" name="reguser" value="Créer un compte">
-
-              </form>
-
-              <?php
-
-              if (isset($erreur)) {
-              	echo $erreur;
-              }
-              ?>
-
+              <input class="form-control bg-light border-left-0" type="text" placeholder="Choisir un identifiant"
+                name="identifiant" value="<?php echo isset($identifiant) ? $identifiant : ''; ?>" required>
             </div>
+          </div>
 
-            <div class="card-footer p-4">
-              <div class="row">
-                <div class="col-6">
-                  <button class="btn btn-block btn-facebook" type="button">
-                    <span>facebook</span>
-                  </button>
-                </div>
-                <div class="col-6">
-                  <button class="btn btn-block btn-twitter" type="button">
-                    <span>twitter</span>
-                  </button>
-                </div>
-
-                 <div class="col-6 mt-4">
-                  <a href="connexion.php">
-                    Déjà un compte?
-                  </a>
-                </div>
-
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label class="small font-weight-bold text-muted">E-mail</label>
+                <input class="form-control bg-light" type="email" placeholder="votre@email.com" name="email"
+                  value="<?php echo isset($email) ? $email : ''; ?>" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label class="small font-weight-bold text-muted">Confirmer E-mail</label>
+                <input class="form-control bg-light" type="email" placeholder="votre@email.com" name="emailconf"
+                  required>
               </div>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label class="small font-weight-bold text-muted">Mot de passe</label>
+                <input class="form-control bg-light" type="password" placeholder="••••••••" name="password_1" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group mb-4">
+                <label class="small font-weight-bold text-muted">Confirmer Mot de passe</label>
+                <input class="form-control bg-light" type="password" placeholder="••••••••" name="password_2" required>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-pill py-2 shadow" name="reguser">
+            S'enregistrer maintenant
+          </button>
+
+          <?php if ($erreur): ?>
+            <div class="alert alert-danger mt-3 animate__animated animate__shakeX small">
+              <?php echo $erreur; ?>
+            </div>
+          <?php endif; ?>
+        </form>
+
+        <div class="text-center mt-4">
+          <span class="text-muted small">Déjà un compte ?</span>
+          <a href="connexion.php" class="small font-weight-bold text-primary ml-1 text-decoration-none">Se connecter</a>
         </div>
       </div>
 
-
+      <div class="card-footer bg-light p-4 text-center border-0">
+        <p class="small text-muted mb-3">Ou s'inscrire avec</p>
+        <div class="d-flex justify-content-center">
+          <button class="btn btn-outline-secondary btn-pill mx-2" type="button"><i
+              class="fab fa-facebook-f mr-2"></i>Facebook</button>
+          <button class="btn btn-outline-secondary btn-pill mx-2" type="button"><i
+              class="fab fa-google mr-2"></i>Google</button>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 
-
-
-</body>
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
-<!--Font awesome pour les petites icônes-->
-<script src="https://kit.fontawesome.com/679b1b8818.js"></script>
-</html>
+<?php require_once 'includes/footer.php'; ?>

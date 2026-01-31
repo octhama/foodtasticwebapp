@@ -1,117 +1,132 @@
 <?php
-// Démarrer la session
-session_start();
+require_once 'includes/config.php';
 
-// insérer les class
-include_once "bddconnect/bdd.php";
-include_once "models/Produit.php";
-include_once "models/ImageProduit.php";
+// Get product ID
+$id = isset($_GET['id']) ? (int) $_GET['id'] : die('ERREUR: ID manquant.');
 
-// établir une connection avec la bdd
-$bdd = new Bdd();
-$db = $bdd->connectoBdd();
-
-// initialisation des models
-$produit = new Produit($db);
-$image_produit = new ImageProduit($db);
-
-// récupérer l'id du produit à éditer
-$id = isset($_GET['id']) ? $_GET['id'] : die('ERREUR: ID manquant.');
-
-// affecter l'id comme produit apparteant a l'id
 $produit->id = $id;
-
-// lire un seul produit enregistrer
 $produit->readOne();
 
-// titre de page
-$titre_page = $produit->nom;
+// If product not found
+if (!$produit->nom) {
+    header("Location: index.php");
+    exit();
+}
 
-// affecter l'id produit
+$titre_page = $produit->nom . " - Foodtastic";
+require_once 'includes/header.php';
+
+// Get images
 $image_produit->produit_id = $id;
-
-// lecture de toutes les images de produit
 $decl_image_produit = $image_produit->readByProductId();
+$images = $decl_image_produit->fetchAll(PDO::FETCH_ASSOC);
+$main_image = count($images) > 0 ? "uploads/images/" . $images[0]['nomimgprod'] : "https://via.placeholder.com/600x400";
+?>
 
-// compter toutes les images de produit
-$num_image_produit = $decl_image_produit->rowCount();
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb bg-transparent p-0 small">
+        <li class="breadcrumb-item"><a href="index.php" class="text-muted text-decoration-none">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="produits.php" class="text-muted text-decoration-none">Boutique</a></li>
+        <li class="breadcrumb-item active text-primary" aria-current="page"><?php echo $produit->nom; ?></li>
+    </ol>
+</nav>
 
+<div class="row">
+    <!-- Product Gallery -->
+    <div class="col-lg-6 mb-4">
+        <div class="card border-0 shadow-sm overflow-hidden mb-3">
+            <img src="<?php echo $main_image; ?>" id="mainProductImg" class="img-fluid"
+                alt="<?php echo $produit->nom; ?>" style="width: 100%; height: 500px; object-fit: cover;">
+        </div>
 
+        <?php if (count($images) > 1): ?>
+            <div class="row no-gutters mx-n1">
+                <?php foreach ($images as $img): ?>
+                    <div class="col-3 p-1">
+                        <img src="uploads/images/<?php echo $img['nomimgprod']; ?>"
+                            class="img-fluid rounded cursor-pointer border thumb-img <?php echo ('uploads/images/' . $img['nomimgprod'] == $main_image) ? 'border-primary' : ''; ?>"
+                            onclick="document.getElementById('mainProductImg').src=this.src; document.querySelectorAll('.thumb-img').forEach(i => i.classList.remove('border-primary')); this.classList.add('border-primary');"
+                            style="height: 80px; width: 100%; object-fit: cover; cursor: pointer;">
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
 
-// entête de la page
-include_once 'market_header.php';
+    <!-- Product Info -->
+    <div class="col-lg-6">
+        <div class="pl-lg-4">
+            <span class="badge badge-soft-success mb-2 px-3 py-2"
+                style="background: var(--accent-color); color: var(--primary-color);">En stock</span>
+            <h1 class="display-5 font-weight-bold mb-3"><?php echo $produit->nom; ?></h1>
 
- echo "<div class='col-md-5' id='img-produit'>";
+            <div class="d-flex align-items-center mb-4">
+                <div class="h3 mb-0 font-weight-bold text-success mr-3">
+                    <?php echo number_format($produit->prix, 2, ',', ' '); ?> €
+                </div>
+                <span class="text-muted small">TVA incluse</span>
+            </div>
 
-    // lecture de toutes les images de produit en relation
-    $decl_image_produit = $image_produit->readByProductId();
-    $num_image_produit = $decl_image_produit->rowCount();
+            <div class="mb-4 pb-4 border-bottom">
+                <h6 class="font-weight-bold text-uppercase small text-muted mb-3">Description</h6>
+                <div class="text-muted lead" style="font-size: 1.1rem;">
+                    <?php echo htmlspecialchars_decode($produit->description); ?>
+                </div>
+            </div>
 
-    // si le compte est plus grand que zero
-    if($num_image_produit>0){
-        // la boucle essaye toutes les images de produit
-        $x=0;
-        while ($ligne = $decl_image_produit->fetch(PDO::FETCH_ASSOC)){
-            // nom d'image et source url
-            $nom_image_produit = $ligne['nomimgprod'];
-            $source="uploads/images/{$nom_image_produit}";
-            $affiche_img_produit=$x==0 ? "display-block" : "display-none";
-            echo "<a href='{$source}' target='_blank' id='produit-img-{$ligne['id']}' class='produit-img {$affiche_img_produit}'>";
-                echo "<img src='{$source}' style='width:100%;' />";
-            echo "</a>";
-            $x++;
-        }
-    }else{ echo "Aucune image(s)."; }
-echo "</div>";
+            <div class="mb-5">
+                <h6 class="font-weight-bold text-uppercase small text-muted mb-3">Détails</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary mr-2"></i> Agriculture locale certifiée
+                    </li>
+                    <li class="mb-2"><i class="fas fa-check-circle text-primary mr-2"></i> Sans conservateurs</li>
+                    <li><i class="fas fa-check-circle text-primary mr-2"></i> Emballage responsable</li>
+                </ul>
+            </div>
 
-echo "<div class='col-md-4'>";
+            <form action="ajouter_au_panier.php" method="GET" class="mb-4">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <div class="form-row align-items-center">
+                    <div class="col-md-3 mb-3">
+                        <label class="small font-weight-bold text-muted d-block text-uppercase">Quantité</label>
+                        <input type="number" name="quantite" value="1" class="form-control form-control-lg text-center"
+                            min="1">
+                    </div>
+                    <div class="col-md-9 mb-3">
+                        <label class="d-none d-md-block">&nbsp;</label>
+                        <?php if (array_key_exists($id, $_SESSION['panier'])): ?>
+                            <a href="panier.php" class="btn btn-success btn-lg btn-block btn-pill shadow">
+                                <i class="fas fa-shopping-cart mr-2"></i>Voir le panier
+                            </a>
+                        <?php else: ?>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block btn-pill shadow">
+                                <i class="fas fa-cart-plus mr-2"></i>Ajouter au panier
+                            </button>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </form>
 
-    echo "<div class='detail-produit'>Prix:</div>";
-    echo "<h4 class='mt-10 description-prix'>&#8364;" . number_format($produit->prix, 2, '.', ',') . "</h4>";
+            <div class="card bg-light border-0">
+                <div class="card-body p-3">
+                    <div class="row text-center">
+                        <div class="col-4 border-right">
+                            <i class="fas fa-shipping-fast text-muted mb-2"></i>
+                            <p class="small mb-0">Livraison 24h</p>
+                        </div>
+                        <div class="col-4 border-right">
+                            <i class="fas fa-shield-alt text-muted mb-2"></i>
+                            <p class="small mb-0">Paiement sécurisé</p>
+                        </div>
+                        <div class="col-4">
+                            <i class="fas fa-undo text-muted mb-2"></i>
+                            <p class="small mb-0">Retour gratuit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    echo "<div class='detail-produit mb-3'>Description du produit:</div>";
-    echo "<div class='mb-3'>";
-        // faire de html
-        $page_description = htmlspecialchars_decode(htmlspecialchars_decode($produit->description));
-
-        // montrer à l'utilisateur
-        echo $page_description;
-    echo "</div>";
-
- echo "<div class='detail-produit mt-3'>Catégorie:</div>";
-    echo "<div class=''>{$produit->nom_categorie}</div>";
-
-
-echo "</div>";
-echo "<div class='col-md-2'>";
-
-    // si le produit était déjà dans le panier
-    if(array_key_exists($id, $_SESSION['panier'])){
-        echo "<div class='mb-3'>Ce produit a déja été ajouter à votre panier.</div>";
-        echo "<a href='panier.php' class='btn btn-success'> <i class='fas fa-shopping-cart'></i>
-            Panier
-        </a>";
-
-    }
-
-    // si le produit n'étais pas encore dans le panier
-    else{
-
-        echo "<form class='form-ajt-au-panier'>";
-            // product id
-            echo "<div class='id-produit display-none'>{$id}</div>";
-
-            echo "<div class='mb-2'>Quantité:</div>";
-            echo "<input type='number' value='1' class='form-control m-b-10px quantite-panier' min='1' />";
-
-            // enable add to cart button
-            echo "<button style='width:100%;' type='submit' class='btn btn-primary btn-pill add-to-cart mt-3'>";
-                echo "<span class='glyphicon glyphicon-shopping-cart'></span> Ajouter au panier";
-            echo "</button>";
-
-        echo "</form>";
-    }
-echo "</div>";
-
-//  pied de page
-include_once 'market_footer.php';
+<?php require_once 'includes/footer.php'; ?>
